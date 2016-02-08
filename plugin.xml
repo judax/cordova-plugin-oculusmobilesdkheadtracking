@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one
+  or more contributor license agreements.  See the NOTICE file
+  distributed with this work for additional information
+  regarding copyright ownership.  The ASF licenses this file
+  to you under the Apache License, Version 2.0 (the
+  "License"); you may not use this file except in compliance
+  with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing,
+  software distributed under the License is distributed on an
+  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  KIND, either express or implied.  See the License for the
+  specific language governing permissions and limitations
+  under the License.
+-->
+
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+    xmlns:rim="http://www.blackberry.com/ns/widgets"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    id="com.judax.cordova.plugin.oculusmobilesdkheadtracking"
+    version="1.0.0">
+
+    <name>OculusMobileSDKHeadTracking</name>
+    <description>Cordova Oculus Mobile SDK Head Tracking Plugin</description>
+    <author>Iker Jamardo Zugaza (a.k.a JudaX)</author>
+    <license>Apache 2.0</license>
+    <keywords>cordova,oculus,headtracking</keywords>
+    <repo>https://github.com/judax/cordova-plugin-oculusmobilesdkheadtracking.git</repo>
+    <issue></issue>
+
+    <js-module src="www/OculusMobileSDKHeadTrackingCordovaPlugin.js" name="OculusMobileSDKHeadTracking">
+        <clobbers target="OculusMobileSDKHeadTracking" />
+    </js-module>
+
+    <!-- android -->
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="OculusMobileSDKHeadTracking">
+                <param name="android-package" value="com.judax.cordova.plugin.oculusmobilesdkheadtracking.OculusMobileSDKHeadTrackingCordovaPlugin"/>
+            </feature>
+        </config-file>
+
+        <source-file src="src/android/src/com/judax/cordova/plugin/oculusmobilesdkheadtracking/OculusMobileSDKHeadTrackingCordovaPlugin.java" target-dir="com/judax/cordova/plugin/oculusmobilesdkheadtracking" />
+        <source-file src="3rdparty/OculusMobileSDKHeadTracking/oculusmobilesdkheadtracking.jar" target-dir="libs" />
+        <source-file src="3rdparty/OculusMobileSDKHeadTracking/armeabi-v7a/libOculusMobileSDKHeadTracking.so" target-dir="libs/armeabi-v7a" />
+        <source-file src="3rdparty/OculusMobileSDKHeadTracking/armeabi-v7a/libvrapi.so" target-dir="libs/armeabi-v7a" />
+    </platform>
+
+</plugin>
