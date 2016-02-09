@@ -7,6 +7,8 @@ import org.apache.cordova.CordovaWebView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.view.ViewGroup;
+
 import com.judax.oculusmobilesdkheadtracking.OculusMobileSDKHeadTracking;
 import com.judax.oculusmobilesdkheadtracking.OculusMobileSDKHeadTrackingData;
 import com.judax.oculusmobilesdkheadtracking.OculusMobileSDKHeadTrackingListener;
@@ -117,14 +119,13 @@ public class OculusMobileSDKHeadTrackingCordovaPlugin extends CordovaPlugin
 		{
 			e.printStackTrace();
 		}
-		oculusMobileSDKHeadTracking.start(cordova.getActivity());
-		webview.addView(oculusMobileSDKHeadTracking.getView(), 1, 1);
 	}
 	
 	@Override
 	public void onPause(boolean multitasking)
 	{
 		super.onPause(multitasking);
+		System.out.println("IKER: onPause");
 		oculusMobileSDKHeadTracking.pause();
 	}
 	
@@ -132,6 +133,7 @@ public class OculusMobileSDKHeadTrackingCordovaPlugin extends CordovaPlugin
 	public void onResume(boolean multitasking)
 	{
 		super.onResume(multitasking);
+		System.out.println("IKER: onResume");
 		oculusMobileSDKHeadTracking.resume();
 	}
 	
@@ -139,6 +141,7 @@ public class OculusMobileSDKHeadTrackingCordovaPlugin extends CordovaPlugin
 	public void onDestroy()
 	{
 		super.onDestroy();
+		System.out.println("IKER: onDestroy");
 		oculusMobileSDKHeadTracking.stop();
 	}
 
@@ -149,11 +152,12 @@ public class OculusMobileSDKHeadTrackingCordovaPlugin extends CordovaPlugin
 		if (action.equals("start"))
 		{
 			eventCallbackContext = callbackContext;
-			// If the oculus mobile sdk head tracking has already started, call the callback
-			if (oculusMobileSDKHeadTracking.hasStarted())
-			{
-				callStartEventCallback();
-			}
+			oculusMobileSDKHeadTracking.addOculusMobileSDKHeadTrackingListener(oculusMobileSDKHeadTrackingListener);
+			System.out.println("IKER: initialize 1");
+			oculusMobileSDKHeadTracking.start(cordova.getActivity());
+			System.out.println("IKER: initialize 2");
+			((ViewGroup)webView.getView().getParent()).addView(oculusMobileSDKHeadTracking.getView(), 1, 1);
+			System.out.println("IKER: initialize 3");
 		}
 		else if (action.equals("setDataUpdateCallback"))
 		{
